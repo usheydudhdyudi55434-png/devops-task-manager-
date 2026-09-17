@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,3 +15,12 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t devops-task-manager .
+
+      - name: Run Docker container
+        run: docker run -d --name devops-task-manager-container -p 8082:80 devops-task-manager
+
+      - name: Test application
+        run: curl --fail http://localhost:8082
+
+      - name: Stop container
+        run: docker stop devops-task-manager-container
