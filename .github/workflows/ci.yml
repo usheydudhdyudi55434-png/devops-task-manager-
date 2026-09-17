@@ -25,8 +25,11 @@ jobs:
       - name: Check container logs
         run: docker logs devops-task-manager-container
 
+      - name: Wait for Nginx
+        run: sleep 3
+
       - name: Test application
-        run: docker exec devops-task-manager-container wget -qO- http://localhost:80
+        run: curl --fail http://localhost:8082
 
       - name: Stop container
         run: docker stop devops-task-manager-container
