@@ -26,7 +26,7 @@ jobs:
         run: docker logs devops-task-manager-container
 
       - name: Test application
-        run: curl --fail http://localhost:8082
+        run: docker exec devops-task-manager-container wget -qO- http://localhost:80
 
       - name: Stop container
         run: docker stop devops-task-manager-container
